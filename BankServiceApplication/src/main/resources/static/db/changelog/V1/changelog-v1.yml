@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: DDL/2024-03-05-init-tables.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: DDL/2024-03-05-added-indexes.sql
+      relativeToChangelogFile: true

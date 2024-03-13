@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: 'Selyantsev Vladislav'
+
+      changes:
+        - createTable:
+            tableName: t_user
+            columns:
+              - column:
+                  name: "user_id"
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: varchar(256)
+              - column:
+                  name: activity_status
+                  type: varchar(16)
+              - column:
+                  name: hash_password
+                  type: varchar(64)
+              - column:
+                  name: birth_date
+                  type: date
+
+        - createTable:
+            tableName: t_bank_account
+            columns:
+              - column:
+                  name: bank_account_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: double
+              - column:
+                  name: user_id
+                  type: uuid
+
+        - createTable:
+            tableName: t_email_address
+            columns:
+              - column:
+                  name: user_email_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(64)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: activity_status
+                  type: varchar(16)
+              - column:
+                  name: user_id
+                  type: uuid
+
+        - createTable:
+            tableName: t_phone_number
+            columns:
+              - column:
+                  name: user_phone_number_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: varchar(16)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: activity_status
+                  type: varchar(16)
+              - column:
+                  name: user_id
+                  type: uuid

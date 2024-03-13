@@ -1,0 +1,76 @@
+POST http://localhost:8080/api/v1/users/registration
+Content-Type: application/json
+
+{
+  "fullName": "Selyantsev Vladislav Andreevich",
+  "password": "12345",
+  "amount": 100.0,
+  "phoneNumber": "+79991534532",
+  "email": "test@mail.ru",
+  "birthDate": "2003-07-15"
+}
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@mail.ru",
+  "password": "12345"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/addPhoneNumber
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAzMjczODcsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjQ0NTExYjFkLWQ3MGQtNGIxYi1hOTM2LTliNDMyYzU4NTlkYiJ9.XYPhEzc5wPRcl7NUxkq9-HmxbQ_Wxw7xuRL9BJYDewg
+
+{
+  "phoneNumber": "+79994155333"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/editPhoneNumber
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAxNzQxNDYsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjcyZjI2ODdhLTI1MzctNDgyMS05YzMxLWQ5NjZkNDJjZjdkYSJ9.xMSoiKv5kvyL_7kxUTsaXUvgyuejBPt4Lonmk45nXBU
+
+{
+  "sourcePhoneNumber": "+79994155334",
+  "targetPhoneNumber": "+79994155337"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/addEmail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAzMzY3NDgsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjQ0NTExYjFkLWQ3MGQtNGIxYi1hOTM2LTliNDMyYzU4NTlkYiJ9._-dk9cNJ5vm0C0MIIj9CjWrSP1QjhpBUPnhsHCs8FmQ
+
+{
+  "emailAddress": "test1@mail.ru"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/editEmail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAxNzQxNDYsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjcyZjI2ODdhLTI1MzctNDgyMS05YzMxLWQ5NjZkNDJjZjdkYSJ9.xMSoiKv5kvyL_7kxUTsaXUvgyuejBPt4Lonmk45nXBU
+
+{
+  "sourceEmail": "test1@mail.ru",
+  "targetEmail": "testChanged1@mail.ru"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/deletePhoneNumber
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAzMzY3NDgsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjQ0NTExYjFkLWQ3MGQtNGIxYi1hOTM2LTliNDMyYzU4NTlkYiJ9._-dk9cNJ5vm0C0MIIj9CjWrSP1QjhpBUPnhsHCs8FmQ
+
+{
+  "phoneNumber": "+79994155337"
+}
+
+###
+PATCH http://localhost:8080/api/v1/users/deleteEmail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QG1haWwucnUiLCJleHAiOjE3MTAzMzY3NDgsImZ1bGxOYW1lIjoiU2VseWFudHNldiBWbGFkaXNsYXYgQW5kcmVldmljaCIsInVzZXJJZCI6IjQ0NTExYjFkLWQ3MGQtNGIxYi1hOTM2LTliNDMyYzU4NTlkYiJ9._-dk9cNJ5vm0C0MIIj9CjWrSP1QjhpBUPnhsHCs8FmQ
+
+{
+  "emailAddress": "test@mail.ru"
+}
