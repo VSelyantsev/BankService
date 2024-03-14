@@ -13,30 +13,50 @@ import ru.itis.kpfu.selyantsev.model.enums.ActivityStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = {PhoneNumberMapper.class, EmailAddressMapper.class})
 public interface UserMapper {
 
     @Mapping(target = "userId", ignore = true)
     @Mapping(target = "hashPassword", expression = "java(UserMapper.getHashPassword(userRequest))")
-    @Mapping(target = "phoneNumbers", expression = "java(UserMapper.initializePhoneNumbersList())")
-    @Mapping(target = "emailAddresses", expression = "java(UserMapper.initializeEmailAddressesList())")
+    @Mapping(target = "phoneNumbers", expression = "java(UserMapper.initializePhoneNumberList())")
+    @Mapping(target = "emailAddresses", expression = "java(UserMapper.initializeEmailAddressList())")
     @Mapping(target = "activityStatus", expression = "java(UserMapper.initializeActivityStatus())")
     @Mapping(target = "bankAccount", ignore = true)
     User toEntity(UserRequest userRequest);
 
-    // write a UserResponse class
+
+    @Mapping(target = "phoneNumbers", expression = "java(UserMapper.getUserPhoneNumbers(user))")
+    @Mapping(target = "emailAddresses", expression = "java(UserMapper.getUserEmailAddresses(user))")
+    @Mapping(target = "amount", expression = "java(UserMapper.getUserBankAmount(user))")
     UserResponse toResponse(User user);
 
     static String getHashPassword(UserRequest userRequest) {
         return new BCryptPasswordEncoder().encode(userRequest.getPassword());
     }
 
-    static List<PhoneNumber> initializePhoneNumbersList() {
+    static List<String> getUserPhoneNumbers(User user) {
+        return user.getPhoneNumbers().stream()
+                .map(phoneNumber -> phoneNumber.getNumber())
+                .collect(Collectors.toList());
+    }
+
+    static List<String> getUserEmailAddresses(User user) {
+        return user.getEmailAddresses().stream()
+                .map(emailAddress -> emailAddress.getEmail())
+                .collect(Collectors.toList());
+    }
+
+    static Double getUserBankAmount(User user) {
+        return user.getBankAccount().getAmount();
+    }
+
+    static List<PhoneNumber> initializePhoneNumberList() {
         return new ArrayList<>();
     }
 
-    static List<EmailAddress> initializeEmailAddressesList() {
+    static List<EmailAddress> initializeEmailAddressList() {
         return new ArrayList<>();
     }
 

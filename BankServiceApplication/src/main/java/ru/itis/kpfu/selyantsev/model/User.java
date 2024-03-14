@@ -29,17 +29,15 @@ public class User {
     private ActivityStatus activityStatus;
 
     @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    // think about CascadeType
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PhoneNumber> phoneNumbers;
 
-    // think about CascadeType
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmailAddress> emailAddresses;
 
-    // think about CascadeType
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private BankAccount bankAccount;
 }
