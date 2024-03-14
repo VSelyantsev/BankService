@@ -8,8 +8,6 @@ import ru.itis.kpfu.selyantsev.dto.request.*;
 import ru.itis.kpfu.selyantsev.dto.response.EmailAddressResponse;
 import ru.itis.kpfu.selyantsev.dto.response.PhoneNumberResponse;
 import ru.itis.kpfu.selyantsev.dto.response.UserResponse;
-import ru.itis.kpfu.selyantsev.model.EmailAddress;
-import ru.itis.kpfu.selyantsev.model.PhoneNumber;
 import ru.itis.kpfu.selyantsev.service.UserService;
 
 import java.util.List;
