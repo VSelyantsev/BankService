@@ -61,14 +61,14 @@ dependencies {
     annotationProcessor 'org.hibernate:hibernate-jpamodelgen:6.1.7.Final'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
-
 sourceSets {
     main {
         java {
             srcDirs = ["src/main/java", "build/generated/sources/annotationProcessor/java/main"]
         }
     }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
