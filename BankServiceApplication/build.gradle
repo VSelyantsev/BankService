@@ -57,8 +57,18 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.mockito:mockito-inline:3.4.0'
 
+    implementation 'org.hibernate:hibernate-core:6.1.7.Final'
+    annotationProcessor 'org.hibernate:hibernate-jpamodelgen:6.1.7.Final'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java", "build/generated/sources/annotationProcessor/java/main"]
+        }
+    }
 }
