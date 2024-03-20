@@ -48,9 +48,10 @@ public class UserServiceImpl implements UserService {
                 .activityStatus(ActivityStatus.AVAILABLE)
                 .build();
 
+        String cutRequestPhoneNumber = subPhoneNumber(userRequest.getPhoneNumber());
         PhoneNumber userPhoneNumber = PhoneNumber.builder()
                 .user(entity)
-                .number(userRequest.getPhoneNumber())
+                .number(cutRequestPhoneNumber)
                 .activityStatus(ActivityStatus.AVAILABLE)
                 .build();
 
@@ -74,8 +75,9 @@ public class UserServiceImpl implements UserService {
                 .map(this::getExistingUser)
                 .orElseThrow(() -> new ru.itis.kpfu.selyantsev.exceptions.AccessDeniedException(ActivityStatus.ANONYMOUS));
 
+        String cutRequestPhoneNumber = subPhoneNumber(phoneNumber.getPhoneNumber());
         PhoneNumber newPhoneNumber = PhoneNumber.builder()
-                .number(phoneNumber.getPhoneNumber())
+                .number(cutRequestPhoneNumber)
                 .activityStatus(ActivityStatus.AVAILABLE)
                 .user(currentAuthenticatedUser)
                 .build();
@@ -92,16 +94,18 @@ public class UserServiceImpl implements UserService {
                 .map(this::getExistingUser)
                 .orElseThrow(() -> new ru.itis.kpfu.selyantsev.exceptions.AccessDeniedException(ActivityStatus.ANONYMOUS));
 
+        String cutSourcePhoneNumber = subPhoneNumber(editPhoneNumberRequest.getSourcePhoneNumber());
         Optional<PhoneNumber> existingPhoneNumber = currentAuthenticatedUser.getPhoneNumbers()
                 .stream()
-                .filter(phoneNumber -> phoneNumber.getNumber().equals(editPhoneNumberRequest.getSourcePhoneNumber()))
+                .filter(phoneNumber -> phoneNumber.getNumber().equals(cutSourcePhoneNumber))
                 .findFirst();
 
         if (!existingPhoneNumber.isPresent()) {
             throw new NotFoundPhoneNumberException(editPhoneNumberRequest.getSourcePhoneNumber());
         }
 
-        existingPhoneNumber.ifPresent(phoneNumber -> phoneNumber.setNumber(editPhoneNumberRequest.getTargetPhoneNumber()));
+        String cutTargetPhoneNumber = subPhoneNumber(editPhoneNumberRequest.getTargetPhoneNumber());
+        existingPhoneNumber.ifPresent(phoneNumber -> phoneNumber.setNumber(cutTargetPhoneNumber));
         userRepository.save(currentAuthenticatedUser);
 
         return userMapper.toResponse(currentAuthenticatedUser);
@@ -210,5 +214,9 @@ public class UserServiceImpl implements UserService {
     private User getExistingUser(UserResponse userResponse) {
         return userRepository.findById(userResponse.getUserId())
                 .orElseThrow(() -> new NotFoundKeyException(userResponse.getUserId()));
+    }
+
+    private String subPhoneNumber(String phoneNumber) {
+        return phoneNumber.replace("+", "").trim();
     }
 }
