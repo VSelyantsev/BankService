@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("SELECT u FROM t_user u JOIN u.emailAddresses e WHERE e.email = :email")
     Optional<User> findUserByEmailAddresses(@Param("email") String email);
+
+    @Query("SELECT u FROM t_user u WHERE u.activityStatus = 'AVAILABLE'")
+    List<User> findActiveUser();
 }
