@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: DDL/2024-03-22-added-field-to-bank-account-table.yml
+      relativeToChangelogFile: true

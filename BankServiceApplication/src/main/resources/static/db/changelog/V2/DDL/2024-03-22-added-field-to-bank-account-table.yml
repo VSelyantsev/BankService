@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: '2'
+      author: 'Selyantsev.vladislav'
+
+      changes:
+        - addColumn:
+            tableName: t_bank_account
+            columns:
+              - column:
+                  name: initial_deposit
+                  type: double
+                  constraints:
+                    nullable: false

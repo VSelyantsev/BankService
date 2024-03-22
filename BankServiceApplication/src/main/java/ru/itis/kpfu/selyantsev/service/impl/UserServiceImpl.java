@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
         BankAccount userBankAccount = BankAccount.builder()
                 .user(entity)
+                .initialDeposit(userRequest.getAmount())
                 .amount(userRequest.getAmount())
                 .build();
         entity.setBankAccount(userBankAccount);
