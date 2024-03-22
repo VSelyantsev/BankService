@@ -10,7 +10,6 @@ import ru.itis.kpfu.selyantsev.dto.response.UserResponse;
 import ru.itis.kpfu.selyantsev.exceptions.ParseDateFormatException;
 import ru.itis.kpfu.selyantsev.service.SearchService;
 
-import java.util.Date;
 import java.util.Optional;
 
 @RestController
