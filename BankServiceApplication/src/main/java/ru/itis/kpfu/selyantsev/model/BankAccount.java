@@ -18,6 +18,7 @@ public class BankAccount {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID bankAccountId;
+    private Double initialDeposit;
     private Double amount;
 
     @OneToOne
