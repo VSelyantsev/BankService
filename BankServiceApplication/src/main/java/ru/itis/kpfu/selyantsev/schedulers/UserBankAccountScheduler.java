@@ -29,16 +29,10 @@ public class UserBankAccountScheduler {
                     double maxAmount = userBankAccount.getInitialDeposit() * 2.07;
 
                     if (newAmount > maxAmount) {
-                        newAmount = maxAmount;
+                        userBankAccount.setAmount(maxAmount);
+                    } else {
+                        userBankAccount.setAmount(newAmount);
                     }
-
-                    // сюда следовало бы добавить какую-нибудь метку(например поле в классе юзера)
-                    // которую ставили бы если бы пользователь уже имел максимальный депозит
-                    // и в методе findActiveUser() фильтровать не только по статусу активности
-                    // но и вот по этой метке
-                    userBankAccount.setAmount(newAmount);
-
-                    user.setBankAccount(userBankAccount);
                 }).toList();
 
         userRepository.saveAll(updatedUser);

@@ -18,6 +18,10 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("SELECT u FROM t_user u JOIN u.emailAddresses e WHERE e.email = :email")
     Optional<User> findUserByEmailAddresses(@Param("email") String email);
 
-    @Query("SELECT u FROM t_user u WHERE u.activityStatus = 'AVAILABLE'")
+    @Query("SELECT u FROM t_user u JOIN u.bankAccount b " +
+            "WHERE u.activityStatus = 'AVAILABLE' AND b.amount < b.initialDeposit * 2.07")
     List<User> findActiveUser();
+
+    @Query("SELECT u FROM t_user u JOIN u.phoneNumbers p WHERE p.number = :phoneNumber")
+    Optional<User> findUserByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }
