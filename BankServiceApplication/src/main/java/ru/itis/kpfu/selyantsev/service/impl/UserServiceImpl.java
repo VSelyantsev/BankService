@@ -212,6 +212,16 @@ public class UserServiceImpl implements UserService {
         return Optional.of(userMapper.toResponse(authenticatedUser));
     }
 
+    @Override
+    public Optional<UserResponse> findUserByPhoneNumber(String userPhoneNumber) {
+        String cutPhoneNumber = subPhoneNumber(userPhoneNumber);
+
+        User foundedUser = userRepository.findUserByPhoneNumber(cutPhoneNumber)
+                .orElseThrow(() -> new NotFoundPhoneNumberException(cutPhoneNumber));
+
+        return Optional.of(userMapper.toResponse(foundedUser));
+    }
+
     private User getExistingUser(UserResponse userResponse) {
         return userRepository.findById(userResponse.getUserId())
                 .orElseThrow(() -> new NotFoundKeyException(userResponse.getUserId()));

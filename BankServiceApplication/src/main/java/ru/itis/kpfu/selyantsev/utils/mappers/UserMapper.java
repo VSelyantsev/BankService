@@ -1,6 +1,5 @@
 package ru.itis.kpfu.selyantsev.utils.mappers;
 
-import org.aspectj.weaver.ast.Literal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", imports = {PhoneNumberMapper.class, EmailAddressMapper.class})
+@Mapper(componentModel = "spring", imports = {
+        PhoneNumberMapper.class, EmailAddressMapper.class, BankAccountMapper.class
+})
 public interface UserMapper {
 
     @Mapping(target = "userId", ignore = true)
@@ -38,13 +39,13 @@ public interface UserMapper {
 
     static List<String> getUserPhoneNumbers(User user) {
         return user.getPhoneNumbers().stream()
-                .map(phoneNumber -> phoneNumber.getNumber())
+                .map(PhoneNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
     static List<String> getUserEmailAddresses(User user) {
         return user.getEmailAddresses().stream()
-                .map(emailAddress -> emailAddress.getEmail())
+                .map(EmailAddress::getEmail)
                 .collect(Collectors.toList());
     }
 

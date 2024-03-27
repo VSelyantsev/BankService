@@ -4,8 +4,6 @@ import ru.itis.kpfu.selyantsev.dto.request.*;
 import ru.itis.kpfu.selyantsev.dto.response.EmailAddressResponse;
 import ru.itis.kpfu.selyantsev.dto.response.PhoneNumberResponse;
 import ru.itis.kpfu.selyantsev.dto.response.UserResponse;
-import ru.itis.kpfu.selyantsev.model.EmailAddress;
-import ru.itis.kpfu.selyantsev.model.PhoneNumber;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +25,6 @@ public interface UserService {
     List<EmailAddressResponse> deleteEmail(EmailAddressRequest emailAddressRequest);
 
     Optional<UserResponse> getCurrentAuthenticationUser();
+
+    Optional<UserResponse> findUserByPhoneNumber(String userPhoneNumber);
 }
